@@ -33,15 +33,7 @@ A structured and opinionated architecture template for building Go applications.
    go mod download
    ```
 
-4. Copy the example configuration file:
-
-   ```bash
-   cp config.example.yaml config.yaml
-   ```
-
-5. Modify the `config.yaml` file to match your configuration needs.
-
-6. Build and run the application:
+4. Build and run the application:
 
    ```bash
    go run main.go
