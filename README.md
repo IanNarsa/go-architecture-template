@@ -46,7 +46,7 @@ The project follows a structured architecture with clear separation of concerns:
   - **repository:** Data access and storage.
   - **service:** Business logic and domain services.
   - **util:** Utility functions and helpers.
-- **pkg:** Shared code that can be reused across projects.
+- **internal:** Shared code that can be reused across projects.
 - **test:** Test helpers and resources.
 - **scripts:** Useful scripts for development and deployment.
 

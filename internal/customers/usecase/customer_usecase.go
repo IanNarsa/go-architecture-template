@@ -1,8 +1,8 @@
 package usecase
 
 import (
-	"go-arch/pkg/customers/model"
-	"go-arch/pkg/customers/repository"
+	"go-arch/internal/customers/model"
+	"go-arch/internal/customers/repository"
 )
 
 type CustomerUsecaseImpl struct {

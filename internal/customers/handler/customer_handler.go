@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"go-arch/pkg/customers/usecase"
+	"go-arch/internal/customers/usecase"
 
 	"github.com/labstack/echo/v4"
 )

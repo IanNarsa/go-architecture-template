@@ -2,7 +2,7 @@ package repository
 
 import (
 	"database/sql"
-	"go-arch/pkg/customers/model"
+	"go-arch/internal/customers/model"
 )
 
 type CustomerImpl struct {

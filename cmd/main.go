@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"go-arch/config"
-	"go-arch/pkg/customers/handler"
-	"go-arch/pkg/customers/repository"
-	"go-arch/pkg/customers/usecase"
+	"go-arch/internal/customers/handler"
+	"go-arch/internal/customers/repository"
+	"go-arch/internal/customers/usecase"
 	"log"
 
 	"github.com/labstack/echo/v4"
