@@ -44,11 +44,8 @@ The project follows a structured architecture with clear separation of concerns:
 - **internal:** Core application logic.
   - **handler:** HTTP request handlers.
   - **repository:** Data access and storage.
-  - **service:** Business logic and domain services.
-  - **util:** Utility functions and helpers.
-- **internal:** Shared code that can be reused across projects.
-- **test:** Test helpers and resources.
-- **scripts:** Useful scripts for development and deployment.
+  - **usecase:** Business logic and domain services.
+  - **model:** Sturct models.
 
 ## Contributing
 
