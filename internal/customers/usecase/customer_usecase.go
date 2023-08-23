@@ -13,6 +13,6 @@ func NewCustomerUsecase(customerRepository repository.CustomerRepository) Custom
 	return &CustomerUsecaseImpl{customerRepository: customerRepository}
 }
 
-func (u *CustomerUsecaseImpl) GetAllCustomer() (*[]model.Customer, error) {
+func (u *CustomerUsecaseImpl) GetAllCustomer() ([]model.Customer, error) {
 	return u.customerRepository.GetAllCustomer()
 }

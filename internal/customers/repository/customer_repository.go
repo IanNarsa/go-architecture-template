@@ -13,7 +13,7 @@ func NewCustomerRepository(db *sql.DB) CustomerRepository {
 	return &CustomerImpl{db: db}
 }
 
-func (r *CustomerImpl) GetAllCustomer() (*[]model.Customer, error) {
+func (r *CustomerImpl) GetAllCustomer() ([]model.Customer, error) {
 
 	query := "select customerNumber, customerName, phone from customers"
 	rows, err := r.db.Query(query)
@@ -35,5 +35,5 @@ func (r *CustomerImpl) GetAllCustomer() (*[]model.Customer, error) {
 		return nil, err
 	}
 
-	return &customers, nil
+	return customers, nil
 }
