@@ -6,11 +6,7 @@ A structured and opinionated architecture template for building Go applications.
 
 - Clean project structure based on domain-driven design principles.
 - Separation of concerns with clear boundaries between layers.
-- Configurable environment settings using Viper.
-- Graceful shutdown and signal handling.
-- Logging with Logrus for enhanced log management.
-- Unit and integration tests with comprehensive test coverage.
-- Continuous integration setup with Travis CI.
+- Environment using echo.
 - Docker support for containerization.
 
 ## Getting Started
