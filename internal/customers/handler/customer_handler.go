@@ -24,9 +24,3 @@ func (h *CustomerHandler) GetAllCustomer(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, customers)
 }
-
-func RegisterCustomerHandler(e *echo.Echo, customerUsecase usecase.CustomerUsecase) {
-	handler := NewCustomerHandler(customerUsecase)
-
-	e.GET("/customers", handler.GetAllCustomer)
-}

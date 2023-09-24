@@ -1,39 +1,58 @@
 package repository
 
 import (
-	"errors"
 	"testing"
 
+	"go-arch/internal/customers/model"
+
 	"github.com/DATA-DOG/go-sqlmock"
-	"github.com/stretchr/testify/assert"
 )
 
-func TestCustomerRepository_GetAllCustomer(t *testing.T) {
-	db, mock, _ := sqlmock.New()
+func TestGetAllCustomer(t *testing.T) {
+	// Create a new SQL mock
+	db, mock, err := sqlmock.New()
+	if err != nil {
+		t.Fatalf("Error creating mock database: %v", err)
+	}
 	defer db.Close()
 
-	repo := NewCustomerRepository(db)
+	// Create a new CustomerImpl instance with the mock database
+	repo := &CustomerImpl{db: db}
 
+	// Define the expected rows and columns
 	rows := sqlmock.NewRows([]string{"customerNumber", "customerName", "phone"}).
-		AddRow(1, "John Doe", "123-456-7890").
-		AddRow(2, "Jane Smith", "987-654-3210")
+		AddRow(1, "Customer 1", "123-456-7890").
+		AddRow(2, "Customer 2", "987-654-3210")
 
-	mock.ExpectQuery("SELECT").WillReturnRows(rows)
+	// Set up the mock expectations
+	mock.ExpectQuery("select customerNumber, customerName, phone from customers").WillReturnRows(rows)
 
+	// Call the method you want to test
 	customers, err := repo.GetAllCustomer()
-	assert.NoError(t, err)
-	assert.Len(t, customers, 2)
-}
+	if err != nil {
+		t.Errorf("Error calling GetAllCustomer: %v", err)
+	}
 
-func TestCustomerRepository_GetAllCustomer_Error(t *testing.T) {
-	db, mock, _ := sqlmock.New()
-	defer db.Close()
+	// Define the expected result
+	expectedCustomers := []model.Customer{
+		{CustomerNumber: 1, CustomerName: "Customer 1", Phone: "123-456-7890"},
+		{CustomerNumber: 2, CustomerName: "Customer 2", Phone: "987-654-3210"},
+	}
 
-	repo := NewCustomerRepository(db)
+	// Compare the actual result to the expected result
+	if len(customers) != len(expectedCustomers) {
+		t.Errorf("Expected %d customers, but got %d", len(expectedCustomers), len(customers))
+	}
 
-	mock.ExpectQuery("SELECT").WillReturnError(errors.New("database error"))
+	for i, actual := range customers {
+		expected := expectedCustomers[i]
+		if actual != expected {
+			t.Errorf("Mismatch in customer data at index %d\nExpected: %+v\nActual:   %+v", i, expected, actual)
+		}
+	}
 
-	customers, err := repo.GetAllCustomer()
-	assert.Error(t, err)
-	assert.Nil(t, customers)
+	// Ensure all expectations were met
+	if err := mock.ExpectationsWereMet(); err != nil {
+		t.Errorf("Unfulfilled expectations: %v", err)
+	}
 }
