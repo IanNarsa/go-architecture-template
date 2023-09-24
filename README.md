@@ -1,6 +1,16 @@
 # go-architecture-template
 
-A structured and opinionated architecture template for building Go applications. This template is designed to provide a solid foundation for your Go projects, promoting maintainability, scalability, and best practices.
+go-architecture-template is a sample project that demonstrates how to structure a Go application using a modular architecture. The project is divided into multiple packages, each of which is responsible for a specific part of the application's functionality. This makes the code easier to understand and maintain, and it also makes it easier to add new features to the application.
+
+<img src="diagram_clean_arch.jpeg"  width="600" height="450">
+
+
+In this project devide four layer
+
+* `models`
+* `usecase`
+* `repository`
+* `handler`
 
 ## Features
 
@@ -32,7 +42,7 @@ A structured and opinionated architecture template for building Go applications.
 4. Build and run the application:
 
    ```bash
-   go run main.go
+   go run cmd/main.go
    ```
 
 ## Project Structure
@@ -47,9 +57,15 @@ The project follows a structured architecture with clear separation of concerns:
   - **usecase:** Business logic and domain services.
   - **model:** Sturct models.
 
-## Contributing
+## Usage
 
-Contributions are welcome! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for more details.
+The API provides the following endpoints:
+
+* `GET  /customers`: Gets all customers.
+* `GET  /products`: Gets all products.
+* `GET  /product/:productCode`: Gets a selected product.
+* `POST /order-product`: Orders a product.
+
 
 ## License
 
@@ -58,3 +74,6 @@ This project is public.
 ---
 
 Feel free to customize this template to provide more specific information about your project.
+
+
+> Refrence: https://hackernoon.com/creating-clean-architecture-using-golang-9h5i3wgr
