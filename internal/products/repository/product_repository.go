@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"go-arch/internal/products/model"
-	"log"
+	"go-arch/pkg/logger"
 	"time"
 )
 
@@ -27,7 +27,7 @@ func (r *ProductImpl) GetAllProducts() (*[]model.Products, error) {
 		product := model.Products{}
 
 		if err := rows.Scan(&product.ProductCode, &product.ProductName, &product.ProductVendor, &product.Stock); err != nil {
-			log.Println("[Error] ", err)
+			logger.Error(err)
 			return nil, err
 		}
 		products = append(products, product)
@@ -35,7 +35,7 @@ func (r *ProductImpl) GetAllProducts() (*[]model.Products, error) {
 	}
 
 	if err := rows.Err(); err != nil {
-		log.Println("[Error] ", err)
+		logger.Error(err)
 		return nil, err
 	}
 
@@ -47,7 +47,7 @@ func (r *ProductImpl) GetSelectedProduct(code model.SelectedProduct) (*[]model.P
 
 	rows, err := r.db.Query("select productCode, productName, productVendor, quantityInStock FROM products where productCode = '" + code.ProductCode + "';")
 	if err != nil {
-		log.Println("[Error] ", err)
+		logger.Error(err)
 		return nil, err
 	}
 	defer rows.Close()
@@ -61,14 +61,14 @@ func (r *ProductImpl) GetSelectedProduct(code model.SelectedProduct) (*[]model.P
 			&product.ProductVendor,
 			&product.Stock,
 		); err != nil {
-			log.Println("[Error] ", err)
+			logger.Error(err)
 			return nil, err
 		}
 		products = append(products, product)
 	}
 
 	if err := rows.Err(); err != nil {
-		log.Println("[Error] ", err)
+		logger.Error(err)
 		return nil, err
 	}
 
@@ -93,8 +93,8 @@ func (r *ProductImpl) OrderProducts(data model.OrderProducts) error {
 
 	tx, err := r.db.Begin()
 	if err != nil {
-		log.Fatal(err)
-		log.Println("[Error] ", err)
+
+		logger.Error(err)
 	}
 
 	// Insert into the "orders" table
@@ -105,7 +105,7 @@ func (r *ProductImpl) OrderProducts(data model.OrderProducts) error {
 		currentTime.Format("2006-01-02"), currentTime.Format("2006-01-02"), "waiting", nil, dt.CustomerNumber)
 	if err != nil {
 		tx.Rollback()
-		log.Fatal(err)
+		logger.Error(err)
 	}
 
 	id, _ := order.LastInsertId() // get last insert id from database and assign it to variable 'id' for further use later
@@ -115,8 +115,8 @@ func (r *ProductImpl) OrderProducts(data model.OrderProducts) error {
 	err = r.db.QueryRow(`SELECT MSRP from products where productCode = ?`, dt.ProductCode).Scan(&orderDetail.Price)
 	if err != nil {
 		tx.Rollback()
-		log.Fatal(err)
-		log.Println("[Error] ", err)
+
+		logger.Error(err)
 	}
 
 	// Insert into the "orderdetails" table
@@ -128,18 +128,18 @@ func (r *ProductImpl) OrderProducts(data model.OrderProducts) error {
 
 	if err != nil {
 		tx.Rollback()
-		log.Fatal(err)
-		log.Println("[Error] ", err)
+
+		logger.Error(err)
 
 	}
 
 	// Commit the transaction
 	if err := tx.Commit(); err != nil {
 		tx.Rollback()
-		log.Fatal(err)
-		log.Println("[Error] ", err)
+
+		logger.Error(err)
 	}
 
-	log.Println("[Info] Success create order")
+	logger.Info("Success create order")
 	return err
 }
