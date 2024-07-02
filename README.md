@@ -7,10 +7,10 @@ go-architecture-template is a sample project that demonstrates how to structure 
 
 In this project devide four layer
 
-* `models`
-* `usecase`
-* `repository`
-* `handler`
+* `handler` for define REST API
+* `usecase` for define logical apps
+* `repository` for define query
+* `models` for define struct / data models
 
 ## Features
 
