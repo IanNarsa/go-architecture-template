@@ -1,6 +1,6 @@
 # go-architecture-template
 
-go-architecture-template is a sample project that demonstrates how to structure a Go application using a modular architecture. The project is divided into multiple packages, each of which is responsible for a specific part of the application's functionality. This makes the code easier to understand and maintain, and it also makes it easier to add new features to the application.
+go-architecture-template is a sample project that demonstrates how to structure a Go application using a modular architecture. The project is divided into multiple packages, each of which is responsible for a specific part of the application's functionality. This makes the code easier to understand and maintain, and it also makes it easier to add new features to the application. This project using Echo framework.
 
 <img src="diagram_clean_arch.jpeg"  width="600" height="450">
 
