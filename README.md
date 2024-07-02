@@ -57,6 +57,57 @@ The project follows a structured architecture with clear separation of concerns:
   - **usecase:** Business logic and domain services.
   - **model:** Sturct models.
 
+```bash
+D:.
+│   Dockerfile
+│   go.mod
+│   go.sum
+│   README.md
+│   
+├───cmd
+│       main.go
+│       
+├───config
+│       config.go
+│       
+├───internal
+│   ├───customers
+│   │   ├───handler
+│   │   │       customer_handler.go
+│   │   │       handler.go
+│   │   │       
+│   │   ├───model
+│   │   │       customer_models.go
+│   │   │       
+│   │   ├───repository
+│   │   │       customer_repository.go
+│   │   │       customer_repository_test.go
+│   │   │       repository.go
+│   │   │       
+│   │   └───usecase
+│   │           customer_usecase.go
+│   │           customer_usecase_test.go
+│   │           usecase.go
+│   │
+│   └───products
+│       ├───handler
+│       │       handler.go
+│       │       product_handler.go
+│       │
+│       ├───model
+│       │       product_models.go
+│       │
+│       ├───repository
+│       │       product_repository.go
+│       │       repository.go
+│       │
+│       └───usecase
+│               product_usecases.go
+│               usecase.go
+│
+└───pkg
+```
+
 ## Usage
 
 The API provides the following endpoints:
